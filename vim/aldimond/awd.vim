@@ -9,6 +9,8 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
+runtime aldimond/el.vim
+
 " UI prefs
 set incsearch
 set ruler
