@@ -2,7 +2,12 @@
 
 " Enable features
 filetype plugin indent on
-syntax enable
+packadd! matchit
+
+if &t_Co > 2 || has("gui_running")
+  syntax enable
+  set hlsearch
+endif
 
 " UI prefs
 set incsearch
