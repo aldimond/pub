@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =4
-let g:netrw_dirhist_4='/home/ald/git/firmware/extrahop/installer'
-let g:netrw_dirhist_3='/home/ald/git/firmware/.mypy_cache/3.7/os'
-let g:netrw_dirhist_2='/home/ald/git/firmware/.mypy_cache/3.7'
-let g:netrw_dirhist_1='/home/ald/git/firmware/.mypy_cache'
