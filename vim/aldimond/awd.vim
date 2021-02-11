@@ -9,7 +9,12 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
+" Enable my features
 runtime aldimond/el.vim
+runtime aldimond/qf.vim
+
+" Quickfix jumping behavior
+set switchbuf=useopen,split
 
 " UI prefs
 set incsearch
