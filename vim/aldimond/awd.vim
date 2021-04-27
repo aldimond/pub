@@ -13,9 +13,6 @@ endif
 runtime aldimond/el.vim
 runtime aldimond/qf.vim
 
-" Quickfix jumping behavior
-set switchbuf=useopen,split
-
 " UI prefs
 set incsearch
 set ruler
