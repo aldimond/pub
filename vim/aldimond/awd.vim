@@ -18,11 +18,15 @@ set incsearch
 set ruler
 set showcmd
 set wildmode=longest,list
+set switchbuf=useopen
 
 if has("mouse")
   " Disables mouse in insert mode so I can middle-click anywhere
   set mouse=nv
 endif
+
+" Check for outside changes every few seconds
+autocmd CursorHold * checktime | call feedkeys("lh")
 
 " Personal formatting
 set expandtab
