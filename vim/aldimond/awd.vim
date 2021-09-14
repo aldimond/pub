@@ -26,7 +26,7 @@ if has("mouse")
 endif
 
 " Check for outside changes every few seconds
-autocmd CursorHold * checktime | call feedkeys("lh")
+autocmd CursorHold * checktime | call feedkeys("jk")
 
 " Personal formatting
 set expandtab
