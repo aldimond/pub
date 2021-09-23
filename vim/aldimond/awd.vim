@@ -25,8 +25,11 @@ if has("mouse")
   set mouse=nv
 endif
 
-" Check for outside changes every few seconds
+" Check for outside changes every few seconds...
 autocmd CursorHold * checktime | call feedkeys("jk")
+" ... and disable the bell
+set vb
+set t_vb=
 
 " Personal formatting
 set expandtab
