@@ -12,6 +12,7 @@ endif
 " Enable my features
 runtime aldimond/el.vim
 runtime aldimond/qf.vim
+runtime aldimond/tmux.vim
 
 " UI prefs
 set incsearch
