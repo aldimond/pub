@@ -1,7 +1,7 @@
 # LOL it's a define guard
 if ! [ -v _ALDIMOND_PUB_BASH_COLORS ] ; then
 
-  # color numbers
+  # color numbers for oldschool 8-color system
   _BLACK=0
   _RED=1
   _GREEN=2
@@ -10,6 +10,13 @@ if ! [ -v _ALDIMOND_PUB_BASH_COLORS ] ; then
   _MAGENTA=5
   _CYAN=6
   _WHITE=7
+
+  # the 8 colors are used in codes 3x, 4x, 9x, 10x
+  # (note: there are less-accepted 256 and RGB systems under:
+  #  - \033[38;5;${c}m for 256 FG colors
+  #  - \033[48;5;${c}m for 256 BG colors
+  #  - \033[38;2;r;g;bm for RGB FG colors
+  #  - \033[48;2;r;g;bm for RGB BG colors
 
   _eightcolors='_BLACK _RED _GREEN _YELLOW _BLUE _MAGENTA _CYAN _WHITE'
   _colorvars=''
@@ -33,7 +40,6 @@ if ! [ -v _ALDIMOND_PUB_BASH_COLORS ] ; then
     eval _BG_BRIGHT${c}=$((${!c} + 100))
     _colorvars+=" _BG_BRIGHT${c}"
   done
-
 
   # Color variables for e.g. `echo -e`. \033 sends an escape, '[' starts
   # command sequence, 'm' ends it.
