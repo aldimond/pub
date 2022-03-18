@@ -1,7 +1,7 @@
-# NB: see also ../zsh/colors.zsh for zsh version
+# NB: see also ../bash/colors.bash for bash version
 
 # LOL it's a define guard
-if ! [ -v _ALDIMOND_PUB_BASH_COLORS ] ; then
+if ! [ -v _ALDIMOND_PUB_ZSH_COLORS ] ; then
 
   # color numbers for oldschool 8-color system
   _BLACK=0
@@ -20,27 +20,27 @@ if ! [ -v _ALDIMOND_PUB_BASH_COLORS ] ; then
   #  - \033[38;2;r;g;bm for RGB FG colors
   #  - \033[48;2;r;g;bm for RGB BG colors
 
-  _eightcolors='_BLACK _RED _GREEN _YELLOW _BLUE _MAGENTA _CYAN _WHITE'
-  _colorvars=''
+  _eightcolors=(_BLACK _RED _GREEN _YELLOW _BLUE _MAGENTA _CYAN _WHITE)
+  _colorvars=()
 
   for c in ${_eightcolors} ; do
-    eval _FG${c}=$((${!c} + 30))
-    _colorvars+=" _FG${c}"
+    eval _FG${c}=$((${(P)c} + 30))
+    _colorvars+="_FG${c}"
   done
 
   for c in ${_eightcolors} ; do
-    eval _BG${c}=$((${!c} + 40))
-    _colorvars+=" _BG${c}"
+    eval _BG${c}=$((${(P)c} + 40))
+    _colorvars+="_BG${c}"
   done
 
   for c in ${_eightcolors} ; do
-    eval _FG_BRIGHT${c}=$((${!c} + 90))
-    _colorvars+=" _FG_BRIGHT${c}"
+    eval _FG_BRIGHT${c}=$((${(P)c} + 90))
+    _colorvars+="_FG_BRIGHT${c}"
   done
 
   for c in ${_eightcolors} ; do
-    eval _BG_BRIGHT${c}=$((${!c} + 100))
-    _colorvars+=" _BG_BRIGHT${c}"
+    eval _BG_BRIGHT${c}=$((${(P)c} + 100))
+    _colorvars+="_BG_BRIGHT${c}"
   done
 
   # Color variables for e.g. `echo -e`. \033 sends an escape, '[' starts
@@ -58,7 +58,7 @@ if ! [ -v _ALDIMOND_PUB_BASH_COLORS ] ; then
 
   # Generated
   for c in ${_colorvars} ; do
-    eval ANSI${c}='"\033[${!c}m"'
+    eval ANSI${c}='"\033[${(P)c}m"'
   done
 
   # Color variables for promts. Adds non-printing delimeters '\[' and '\]' that
@@ -76,8 +76,8 @@ if ! [ -v _ALDIMOND_PUB_BASH_COLORS ] ; then
 
   # Generated
   for c in ${_colorvars} ; do
-    eval PROMPT${c}='"\[\033[${!c}m\]"'
+    eval PROMPT${c}='"\[\033[${(P)c}m\]"'
   done
 
-  _ALDIMOND_PUB_BASH_COLORS=yes
+  _ALDIMOND_PUB_ZSH_COLORS=yes
 fi
