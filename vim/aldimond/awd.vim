@@ -36,3 +36,7 @@ set t_vb=
 set expandtab
 set shiftwidth=2
 set softtabstop=2
+
+" Trying these :cn / :cp mappings...
+map <F5> :cp<CR>
+map <F6> :cn<CR>
