@@ -3,6 +3,12 @@
 source `dirname ${BASH_SOURCE}`/colors.bash
 
 
+# Defaults
+c1="${1:-${PBOLD}(^_^)}"
+c2="${2:-${PBOLD}${PROMPT_FG_RED}¯\(°_o)/¯}"
+cerr="${3:-(╯°Д°)╯ ┻━┻}"
+
+
 # Start timing at the first command after the last prompt.
 trap 'test -v _awd_start || _awd_start=${EPOCHREALTIME/./}' DEBUG
 
@@ -15,12 +21,6 @@ PROMPT_COMMAND=(
     'if [ ${#_awd_t} -gt 6 ] ; then _awd_t=${_awd_t:0:-6} ; else _awd_t= ; fi'
     'unset _awd_start'
 )
-
-
-# Defaults
-c1="${1:-${PBOLD}(^_^)}"
-c2="${2:-${PBOLD}${PROMPT_FG_RED}¯\(°_o)/¯}"
-cerr="${3:-(╯°Д°)╯ ┻━┻}"
 
 
 PS1="${PRESET}"
