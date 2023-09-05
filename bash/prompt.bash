@@ -6,13 +6,14 @@ source `dirname ${BASH_SOURCE}`/colors.bash
 # Start timing at the first command after the last prompt.
 trap 'test -v _awd_start || _awd_start=${EPOCHREALTIME/./}' DEBUG
 
-# Capture return code, stop timing.
-PROMPT_COMMAND=( \
+# Use PROMPT_COMMAND to set up some stuff used in the prompt.
+PROMPT_COMMAND=(
     # Capture return code
-    '_awd_status="$?"' \
+    '_awd_status="$?"'
     # Stop timing
-    '_awd_t=$(( ${EPOCHREALTIME/./} - $_awd_start ))' \
-    'unset _awd_start' )
+    '_awd_t=$(( ${EPOCHREALTIME/./} - $_awd_start ))'
+    'unset _awd_start'
+)
 
 
 # Defaults
