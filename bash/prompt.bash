@@ -8,10 +8,11 @@ trap 'test -v _awd_start || _awd_start=${EPOCHREALTIME/./}' DEBUG
 
 # Use PROMPT_COMMAND to set up some stuff used in the prompt.
 PROMPT_COMMAND=(
-    # Capture return code
-    '_awd_status="$?"'
-    # Stop timing
+    # Capture return code, turning 0 into nothing
+    '_awd_status="${?#0}"'
+    # Stop timing; squash it down if <1s
     '_awd_t=$(( ${EPOCHREALTIME/./} - $_awd_start ))'
+    'if [ ${#_awd_t} -gt 6 ] ; then _awd_t=${_awd_t:0:-6} ; else _awd_t= ; fi'
     'unset _awd_start'
 )
 
@@ -22,14 +23,13 @@ c2="${2:-${PBOLD}${PROMPT_FG_RED}¯\(°_o)/¯}"
 cerr="${3:-(╯°Д°)╯ ┻━┻}"
 
 
+PS1="${PRESET}"
+
 # (Optionally) last command's return code.
-# NB: backtick is evaluated *after* backslash evals, so the color string can't
-# be part of it (you could `echo -e` but you wouldn't get the non-printing
-# character delimeters)
-PS1="${PRESET}${PBOLD}${PROMPT_FG_RED}"'`if [ "${_awd_status}" -ne 0 ] ; then echo "${cerr} (${_awd_status}) " ; fi ; `'
+PS1+="${PBOLD}${PROMPT_FG_RED}"'${_awd_status:+${cerr} (${_awd_status}) }'
 
 # (Optionally) last command's run time.
-PS1+="${PROMPT_FG_BLACK}"'`if [ ${#_awd_t} -gt 6 ] ; then echo "【┘】${_awd_t:0:-6}s " ; fi ; `'
+PS1+="${PROMPT_FG_BLACK}"'${_awd_t:+【┘】${_awd_t}s }'
 
 # Datetime
 PS1+="${PROMPT_FG_GREEN}[ \d \t ] "
