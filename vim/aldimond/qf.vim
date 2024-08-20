@@ -28,3 +28,6 @@ command -nargs=+ GGA call GGfunc('a', <q-args>)
 command -nargs=+ LGG call LGGfunc(' ', <q-args>)
 " :LGGA, like :lgrepadd, appends to the location list
 command -nargs=+ LGGA call LGGfunc('a', <q-args>)
+
+" Filter some more stuff out of efm
+set errorformat^=%-GLast login:%m
