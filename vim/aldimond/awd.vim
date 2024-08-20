@@ -40,6 +40,8 @@ set softtabstop=2
 " Map these to :lpr/:lne for going through search results
 map <F5> :lpr<CR>
 map <F6> :lne<CR>
+map <F7> :cp<CR>
+map <F8> :cn<CR>
 
 " Stop the accursed Python autoindenting
 autocmd FileType python setlocal indentkeys-=<:>
