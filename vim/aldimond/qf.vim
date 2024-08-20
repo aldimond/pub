@@ -30,4 +30,4 @@ command -nargs=+ LGG call LGGfunc(' ', <q-args>)
 command -nargs=+ LGGA call LGGfunc('a', <q-args>)
 
 " Filter some more stuff out of efm
-set errorformat^=%-GLast login:%m
+set errorformat^=%-GLast\ login:%m
