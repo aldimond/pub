@@ -13,6 +13,7 @@ endif
 runtime aldimond/el.vim
 runtime aldimond/qf.vim
 runtime aldimond/tmux.vim
+runtime aldimond/misc.vim
 
 " UI prefs
 set incsearch
