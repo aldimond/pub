@@ -1,3 +1,2 @@
 [alias]
 	retarget = "! f() { git rebase --onto \"${1}\" && git branch -u \"${1}\" ; }; f"
-	ecco = "! f() { echo $1 | hexdump -b ; }; f"
