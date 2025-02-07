@@ -1,5 +1,5 @@
-LYFILES := $(wildcard *.ly)
-PDFFILES := $(addsuffix .pdf,$(basename $(LYFILES)))
+LYFILES = $(wildcard *.ly)
+PDFFILES = $(addsuffix .pdf,$(basename $(LYFILES)))
 
 all: $(PDFFILES)
 
