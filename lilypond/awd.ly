@@ -27,6 +27,20 @@ relative mode.
         
         (else mus)))
 
+% This is an alternative to octoHints that's maybe better. Notes have to be
+% entered manually but they don't mess up stems, beams, and slurs.
+\layout {
+  \context {
+    \name AwdHints
+    \type Engraver_group
+    \consists Note_heads_engraver
+    \override NoteHead.font-size = -3
+    \override NoteHead.style = #'harmonic-black
+    \alias Voice
+  }
+  \inherit-acceptability AwdHints Voice
+  \context { \Staff \accepts AwdHints }
+}
 
 altStaff =
 #(define-music-function (m) (ly:music?)
