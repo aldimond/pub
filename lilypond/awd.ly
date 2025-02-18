@@ -15,6 +15,7 @@ relative mode.
                    (assoc-set! (ly:music-property cuenote 'tweaks)
                               (cons 'NoteHead 'font-size)
                               -3))
+             (set! (ly:music-property cuenote 'articulations) (list))
              (make-music 'EventChord
                          'elements (list mus cuenote))))
             
