@@ -43,11 +43,32 @@ relative mode.
 }
 
 altStaff =
-#(define-music-function (m) (ly:music?)
-  "Renders a small staff for alternative parts. This is not necessarily
+#(define-music-function (b m) (string? ly:music?)
+  "Renders a small staff for alternative parts. @var{m} is the music, @var{b}
+  is the name of the staff to render it above. It would be cool to find that
+  automatically but it's hard.
+
+  This is not necessarily
 the ideal way to do it... it might be better to define a staff at top-level
 then use \\startStaff and \\stopStaff to bring it in and out.
 "
   #{
-    \new Staff \with { fontSize = #-3 \override StaffSymbol.staff-space = #(magstep -3)} { \once {\omit Staff.TimeSignature \omit Staff.Clef \omit Staff.KeySignature} #m }
+    \new Staff \with {
+      alignAboveContext = #b
+      \omit Clef
+      \omit TimeSignature
+      \omit KeySignature
+      fontSize = #-3
+      \override StaffSymbol.staff-space = #(magstep -3)
+    } { #m }
   #})
+
+solo = ^\markup \smallCaps "Solo"
+
+markit = #(define-event-function (m) (markup?)
+  #{ -\markup \italic #m #})
+
+awdPageSetup = \paper {
+  #(set-paper-size "letter")
+  left-margin = 0.5\in
+}
