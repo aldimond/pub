@@ -69,7 +69,19 @@ solo = ^\markup \smallCaps "Solo"
 markit = #(define-event-function (m) (markup?)
   #{ -\markup \italic #m #})
 
+% This is useful for stuff I'm actually going to print -- should prevent
+% 3-digit measure numbers from getting cut off
 awdPageSetup = \paper {
   #(set-paper-size "letter")
   left-margin = 0.5\in
 }
+
+awdTabletSetup = \paper {
+  left-margin = 7\mm
+  right-margin = 2\mm
+  top-margin = 2\mm
+  bottom-margin = 2\mm
+}
+
+boxSection = #(define-music-function (m) (markup?)
+  #{ \sectionLabel \markup \box #m #})
