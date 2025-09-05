@@ -1,2 +1,3 @@
 [alias]
 	retarget = "! f() { git rebase --onto \"${1}\" && git branch -u \"${1}\" ; }; f"
+	tackon = "! echo ' --- STAGED ---' ; echo ; git diff --staged ; echo ; echo ' --- UNSTAGED ---' ; echo ; git diff ; echo ; read -p 'ok (y/n)? ' ok ; if [ \"${ok}\" = y ] ; then git add . && git commit --amend --no-edit ; fi"
