@@ -21,13 +21,13 @@ function LGGfunc(action, args)
 endfunction
 
 " :GG, like :grep, uses a new QF list
-command -nargs=+ GG call GGfunc(' ', <q-args>)
+command -nargs=+ -complete=file GG call GGfunc(' ', <q-args>)
 " :GGA, like :grepadd, appends to existing QF list
-command -nargs=+ GGA call GGfunc('a', <q-args>)
+command -nargs=+ -complete=file GGA call GGfunc('a', <q-args>)
 " :LGG, like :lgrep, uses the curent window's location list
-command -nargs=+ LGG call LGGfunc(' ', <q-args>)
+command -nargs=+ -complete=file LGG call LGGfunc(' ', <q-args>)
 " :LGGA, like :lgrepadd, appends to the location list
-command -nargs=+ LGGA call LGGfunc('a', <q-args>)
+command -nargs=+ -complete=file LGGA call LGGfunc('a', <q-args>)
 
 " Filter 'Last login' messages from efm
 set errorformat^=%-GLast\ login:%m
