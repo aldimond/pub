@@ -20,12 +20,13 @@ joins = parser.add_mutually_exclusive_group()
 joins.add_argument("--join-result", "-j", metavar="STR", help="Join result with STR as separator.")
 joins.add_argument("--join-nulls", "-0", action="store_true", help="Join result with nulls.")
 joins.add_argument("--join-space", "-s", action="store_true", help="Join result with spaces.")
+joins.add_argument("--join-empty", "-c", action="store_true", help="Join result with empty-string (concat into one string)")
 parser.add_argument("func_name", help="Qualified function name")
 parser.add_argument("func_args", nargs="*")
 
 args = parser.parse_args()
 
-join_char = " " if args.join_space else "\0" if args.join_nulls else args.join_result
+join_char = " " if args.join_space else "\0" if args.join_nulls else "" if args.join_empty else args.join_result
 
 fparts = args.func_name.rsplit(".", maxsplit=1)
 fname = fparts[-1]
@@ -58,10 +59,10 @@ result = f(*fargs, **fkwargs)
 if args.iterate_result:
     result = list(result)
 
-if args.repr and not join_char:
+if args.repr and not isinsntance(join_char, str):
     result = repr(result)
 
-if join_char:
+if isinstance(join_char, str):
     result = join_char.join((repr(i) if args.repr else str(i) for i in result))
 
 print(result)
