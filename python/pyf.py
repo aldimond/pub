@@ -45,7 +45,7 @@ if args.kwargs:
         if len(aparts) > 1:
             fkwargs[aparts[0]] = aparts[1]
         else:
-            fargs = aparts[0]
+            fargs.append(aparts[0])
 else:
     fargs = args.func_args
 
