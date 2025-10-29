@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument("--kwargs", "-k", action="store_true", help="Args with = are split on = as kwargs")
 parser.add_argument("--literal-args", "-l", action="store_true", help="Args and kwargs values are interpreted as Python literals (otherwise strings).")
+parser.add_argument("--one-list", "-o", action="store_true", help="Passes list of args as a single arg instead of starring them.")
 parser.add_argument("--iterate-result","-i", action="store_true", help="Force iteration of result via list().")
 parser.add_argument("--repr", "-r", action="store_true", help="Result is printed with repr() (otherwise as a string).")
 parser.add_argument("func_name", help="Qualified function name")
@@ -40,8 +41,11 @@ else:
     fargs = args.func_args
 
 if args.literal_args:
-    fargs = (ast.literal_eval(a) for a in fargs)
+    fargs = [ast.literal_eval(a) for a in fargs]
     fkwargs = {k: ast.literal_eval(v) for k, v in fkwargs.items()}
+
+if args.one_list:
+    fargs = [fargs]
 
 result = f(*fargs, **fkwargs)
 if args.iterate_result:
