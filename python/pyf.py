@@ -15,11 +15,17 @@ parser.add_argument("--kwargs", "-k", action="store_true", help="Args with = are
 parser.add_argument("--literal-args", "-l", action="store_true", help="Args and kwargs values are interpreted as Python literals (otherwise strings).")
 parser.add_argument("--one-list", "-o", action="store_true", help="Passes list of args as a single arg instead of starring them.")
 parser.add_argument("--iterate-result","-i", action="store_true", help="Force iteration of result via list().")
-parser.add_argument("--repr", "-r", action="store_true", help="Result is printed with repr() (otherwise as a string).")
+parser.add_argument("--repr", "-r", action="store_true", help="Result is printed with repr() (otherwise as a string). This happens after --iterate-result but before --join-result.")
+joins = parser.add_mutually_exclusive_group()
+joins.add_argument("--join-result", "-j", metavar="STR", help="Join result with STR as separator.")
+joins.add_argument("--join-nulls", "-0", action="store_true", help="Join result with nulls.")
+joins.add_argument("--join-space", "-s", action="store_true", help="Join result with spaces.")
 parser.add_argument("func_name", help="Qualified function name")
 parser.add_argument("func_args", nargs="*")
 
 args = parser.parse_args()
+
+join_char = " " if args.join_space else "\0" if args.join_nulls else args.join_result
 
 fparts = args.func_name.rsplit(".", maxsplit=1)
 fname = fparts[-1]
@@ -48,9 +54,14 @@ if args.one_list:
     fargs = [fargs]
 
 result = f(*fargs, **fkwargs)
+
 if args.iterate_result:
     result = list(result)
-if args.repr:
+
+if args.repr and not join_char:
     result = repr(result)
+
+if join_char:
+    result = join_char.join((repr(i) if args.repr else str(i) for i in result))
 
 print(result)
