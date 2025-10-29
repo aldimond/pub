@@ -44,7 +44,7 @@ if args.literal_args:
     fkwargs = {k: ast.literal_eval(v) for k, v in fkwargs.items()}
 
 result = f(*fargs, **fkwargs)
-if args.iterate:
+if args.iterate_result:
     result = list(result)
 if args.repr:
     result = repr(result)
