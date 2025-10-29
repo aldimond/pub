@@ -18,15 +18,17 @@ parser.add_argument("--iterate-result","-i", action="store_true", help="Force it
 parser.add_argument("--repr", "-r", action="store_true", help="Result is printed with repr() (otherwise as a string). This happens after --iterate-result but before --join-result.")
 joins = parser.add_mutually_exclusive_group()
 joins.add_argument("--join-result", "-j", metavar="STR", help="Join result with STR as separator.")
-joins.add_argument("--join-nulls", "-0", action="store_true", help="Join result with nulls.")
+joins.add_argument("--join-nulls", "-0", action="store_true", help="Join result with nulls and suppress trailing newline.")
 joins.add_argument("--join-space", "-s", action="store_true", help="Join result with spaces.")
 joins.add_argument("--join-empty", "-c", action="store_true", help="Join result with empty-string (concat into one string)")
+joins.add_argument("--join-newline", "-n", action="store_true", help="Join result with newlines")
 parser.add_argument("func_name", help="Qualified function name")
 parser.add_argument("func_args", nargs="*")
 
 args = parser.parse_args()
 
-join_char = " " if args.join_space else "\0" if args.join_nulls else "" if args.join_empty else args.join_result
+join_char = " " if args.join_space else "\0" if args.join_nulls else "" if args.join_empty else "\n" if args.join_newline else args.join_result
+end_char = "" if args.join_nulls else "\n"
 
 fparts = args.func_name.rsplit(".", maxsplit=1)
 fname = fparts[-1]
@@ -65,4 +67,4 @@ if args.repr and not isinsntance(join_char, str):
 if isinstance(join_char, str):
     result = join_char.join((repr(i) if args.repr else str(i) for i in result))
 
-print(result)
+print(result, end=end_char)
