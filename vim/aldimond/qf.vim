@@ -29,6 +29,9 @@ command -nargs=+ -complete=file LGG call LGGfunc(' ', <q-args>)
 " :LGGA, like :lgrepadd, appends to the location list
 command -nargs=+ -complete=file LGGA call LGGfunc('a', <q-args>)
 
+" clang-tidy error format
+set errorformat^=[%*[^]]]\ %f:%l:%c:%m
+
 " Filter 'Last login' messages from efm
 set errorformat^=%-GLast\ login:%m
 
