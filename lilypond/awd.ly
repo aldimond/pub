@@ -85,3 +85,16 @@ awdTabletSetup = \paper {
 
 boxSection = #(define-music-function (m) (markup?)
   #{ \sectionLabel \markup \box #m #})
+
+% Function to put note names in markup. Maybe ideally it would use the
+% chordRootNamer context property, but it's annoying to get a context in markup
+% mode, and I don't necessarily need to be perfect about it :-P.
+%
+% Things this solves:
+%  0. Just using \flat and \sharp gets the size and vertical alignment wrong
+%  1. There's a Scheme function for this but no markup command
+%  2. The Scheme function outputs a list markup, which gets rendered with a
+%     space between the note name and accidental unless you squash that somehow
+#(define-markup-command (note-name layout props note) (ly:pitch?)
+  (interpret-markup layout props
+    (markup #:override `(word-space . 0) (note-name->markup note #f))))
