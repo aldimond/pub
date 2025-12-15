@@ -47,3 +47,7 @@ map <F8> :cn<CR>
 " Stop the accursed Python autoindenting
 autocmd FileType python setlocal indentkeys-=<:>
 autocmd FileType python setlocal indentkeys-=:
+
+" Makes just the current Lilypond file (expecting that a relevant makefile
+" rule exists).
+command MLY make -C "%:h" "%:t:r.pdf"
