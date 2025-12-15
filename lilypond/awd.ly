@@ -1,4 +1,4 @@
-\version "2.24.4"
+\version "2.24.3"
 
 octoHints = #(define-music-function (offs mus) (integer? ly:music?)
   "Adds 'hint' notes to @var{mus}, @var{offs} octaves above/below notes
@@ -98,3 +98,6 @@ boxSection = #(define-music-function (m) (markup?)
 #(define-markup-command (note-name layout props note) (ly:pitch?)
   (interpret-markup layout props
     (markup #:override `(word-space . 0) (note-name->markup note #f))))
+
+hintR = \markup \sans \bold \tiny "R"
+hintL = \markup \sans \bold \tiny "L"
