@@ -126,7 +126,7 @@ result = f(*fargs, **fkwargs)
 if args.iterate_result:
     result = list(result)
 
-if args.repr and not isinsntance(join_char, str):
+if args.repr and not isinstance(join_char, str):
     result = repr(result)
 
 if isinstance(join_char, str):
