@@ -6,7 +6,8 @@ awdate() {
     # This test complains about decimal input but returns false, which has the
     # reasonable result of assuming decimal seconds.
     while [ "${s}" -gt 100000000000 ] ; do
-        # Assume smaller-than-seconds granularity; chop off 3 digits at a time.
+        # We are past the year 5138 or so. Assume smaller-than-seconds
+        # granularity; chop off 3 digits at a time.
         s="${s:0:-3}"
         echo -n '.' >&2
     done
