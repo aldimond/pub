@@ -95,6 +95,9 @@ boxSection = #(define-music-function (m) (markup?)
 %  1. There's a Scheme function for this but no markup command
 %  2. The Scheme function outputs a list markup, which gets rendered with a
 %     space between the note name and accidental unless you squash that somehow
+%
+% XXX: as of lilypond 2.26 this doesn't work, but they added \text-flat and
+% \text-sharp so... this is DEPRECATED!
 #(define-markup-command (note-name layout props note) (ly:pitch?)
   (interpret-markup layout props
     (markup #:override `(word-space . 0) (note-name->markup note #f))))
