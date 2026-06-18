@@ -69,6 +69,10 @@ Examples:
     - Do floating-point math (needs -l to evaluate args as numbers)
         $ %(prog)s -l math.pow 2.5 3.6
         27.07597043574791o
+
+    - Use as a shell boolean test
+        $ if %(prog)s -q re.match 'ab+c+d' 'abcccccd' ; then echo matched ; fi
+        matched
 """,
 )
 
@@ -80,6 +84,7 @@ arg_opts.add_argument("--one-list", "-o", action="store_true", help="Passes list
 res_opts = parser.add_argument_group("Result handling")
 res_opts.add_argument("--iterate-result","-i", action="store_true", help="Force iteration of result via list(). Typically with --join-* options below this is not needed.")
 res_opts.add_argument("--repr", "-r", action="store_true", help="Result is formatted with repr() (otherwise with str()). This happens after --iterate-result but before --join-result.")
+res_opts.add_argument("--quiet", "-q", action="store_true", help="Output is suppressed, status code 0 if result is truthy, 1 otherwise.")
 joins = res_opts.add_mutually_exclusive_group()
 joins.add_argument("--join-result", "-j", metavar="STR", help="Join result with STR as separator.")
 joins.add_argument("--join-nulls", "-0", action="store_true", help="Join result with nulls and suppress trailing newline.")
@@ -132,4 +137,7 @@ if args.repr and not isinstance(join_char, str):
 if isinstance(join_char, str):
     result = join_char.join((repr(i) if args.repr else str(i) for i in result))
 
-print(result, end=end_char)
+if args.quiet:
+    sys.exit(0 if result else 1)
+else:
+    print(result, end=end_char)
